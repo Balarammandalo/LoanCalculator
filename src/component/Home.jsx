@@ -1,21 +1,24 @@
-import React , {useState , useEffect} from 'react'
+import React , { useEffect , useContext} from 'react'
 import LoanCalculator from './LoanCalculator'
 import NavbarIcon from './NavbarIcon'
+import ExchangeLive from './ExchangeLive';
+import { ThemeContext } from '../context/ThemeContext';
 
 const Home = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
+  const { theme} = useContext(ThemeContext)
+  
   useEffect(() => {
-    if (darkMode) {
+    if (theme) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [darkMode]);
+  }, [theme]);
+
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
-      <NavbarIcon darkMode={darkMode} setDarkMode={setDarkMode} />
-      <LoanCalculator darkMode={darkMode} />
+    <div className={`min-h-screen transition-colors duration-300 ${theme ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+      <NavbarIcon />
+      <LoanCalculator/>
     </div>
   )
 }

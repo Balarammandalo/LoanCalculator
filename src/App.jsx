@@ -1,4 +1,5 @@
 import React from 'react'
+import { ThemeProvider } from './context/ThemeContext'
 import './App.css'
 import Home from './component/Home'
 import {Routes , Route} from 'react-router-dom'
@@ -8,7 +9,7 @@ import NavbarIcon from './component/NavbarIcon'
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider>
       
     <div>
       <Routes>
@@ -17,7 +18,7 @@ const App = () => {
       <Route path="/error" element={<ErrorPage />} />
     </Routes>
     </div>
-    </>
+    </ThemeProvider>
   )
 }
 

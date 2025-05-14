@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
-function LoanCalculator({ darkMode }) {
-  const [currency, setCurrency] = useState("USD");
+function LoanCalculator() {
+
+  const {theme,currency , setCurrency} = useContext(ThemeContext)
 
   const [loanAmount, setLoanAmount] = useState("");
   const [annualInterestRate, setAnnualInterestRate] = useState("");
@@ -59,26 +61,26 @@ function LoanCalculator({ darkMode }) {
     setShowResult(false);
   }
 
-  const labelColorChange = darkMode
+  const labelColorChange = theme
     ? "bg-black text-white"
     : "bg-white text-black";
-  const inputColorChange = darkMode
+  const inputColorChange = theme
     ? "bg-black text-white"
     : "bg-white text-black focus:ring-2 focus:ring-blue";
-  const buttonColorChange = darkMode
+  const buttonColorChange = theme
     ? "bg-gray-600 text-white hover:bg-gray-900"
     : "bg-indigo-600 text-white hover:bg-indigo-700";
-  const resetButtonChange = darkMode
+  const resetButtonChange = theme
     ? "border border-gray-600"
     : "border border-indigo-700 ";
-  const hoverBg = darkMode ? 'hover:bg-gray-500' : 'hover:bg-indigo-900'
-  const textColor = darkMode ? 'hover:text-white' : 'hover:text-white'
+  const hoverBg = theme ? 'hover:bg-gray-500' : 'hover:bg-indigo-900'
+  const textColor = theme ? 'hover:text-white' : 'hover:text-white'
 
 
   return (
     <div
       className={`p-4 transition-colors ${
-        darkMode ? "bg-black" : "bg-white"
+        theme ? "bg-black" : "bg-white"
       } min-h-screen`}
     >
       <h1 className="text-[25px] font-bold uppercase mb-5">
@@ -161,20 +163,20 @@ function LoanCalculator({ darkMode }) {
         <>
           <div
             className={`mb-2 text-[18px] font-bold ${
-              darkMode ? "text-white" : "text-gray-700"
+              theme ? "text-white" : "text-gray-700"
             }`}
           >
             Monthly EMI: {currency} ${monthlyEMI.toFixed(2)}
           </div>
           <div
             className={`text-xs mb-5 ${
-              darkMode ? "text-gray-300" : "text-gray-600"
+              theme ? "text-gray-300" : "text-gray-600"
             }`}
           >
             <label
               htmlFor="currency"
               className={`mb-1 select-none text-[18px] font-bold mr-2 ${
-                darkMode ? "text-white" : ""
+                theme ? "text-white" : ""
               }`}
             >
               Currency
@@ -183,7 +185,7 @@ function LoanCalculator({ darkMode }) {
               id="currency"
               name="currency"
               className={`border rounded px-3 py-2 text-sm w-28 cursor-pointer focus:outline-none focus:ring-1 focus:border-gray-600 ${
-                darkMode
+                theme
                   ? "bg-black text-white border-gray-600 focus:ring-white"
                   : "bg-white text-black border-gray-300 focus:ring-gray-600"
               }`}
@@ -194,36 +196,39 @@ function LoanCalculator({ darkMode }) {
               <option>EUR</option>
               <option>GBP</option>
               <option>INR</option>
+              <option>JPY</option>
+              <option>CAD</option>
+              <option>AUD</option>
             </select>
           </div>
 
           <div
             className={`text-center border rounded-md shadow-sm overflow-auto max-h-[300px] ${
-              darkMode
+              theme
                 ? "bg-black text-white border-gray-700"
                 : "bg-white text-black border-gray-100"
             }`}
           >
             <table
               className={`min-w-full divide-y text-sm ${
-                darkMode ? "divide-gray-700" : "divide-gray-100"
+                theme ? "divide-gray-700" : "divide-gray-100"
               }`}
             >
               <caption
                 className={`text-center p-4 font-normal text-[22px] font-bold ${
-                  darkMode ? "text-white" : "text-gray-900"
+                  theme ? "text-white" : "text-gray-900"
                 }`}
               >
                 Amortization Schedule ({currency})
               </caption>
               <thead
-                className={`${darkMode ? "bg-black" : "bg-white"} sticky top-0`}
+                className={`${theme ? "bg-black" : "bg-white"} sticky top-0`}
               >
                 <tr>
                   <th
                     scope="col"
                     className={`px-6 py-3 text-center font-normal text-[18px] font-bold ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
+                      theme ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     Month
@@ -231,7 +236,7 @@ function LoanCalculator({ darkMode }) {
                   <th
                     scope="col"
                     className={`px-6 py-3 text-center font-normal text-[18px] font-bold ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
+                      theme ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     Principal
@@ -239,7 +244,7 @@ function LoanCalculator({ darkMode }) {
                   <th
                     scope="col"
                     className={`px-6 py-3 text-center font-normal text-[18px] font-bold ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
+                      theme ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     Interest
@@ -247,7 +252,7 @@ function LoanCalculator({ darkMode }) {
                   <th
                     scope="col"
                     className={`px-6 py-3 text-center font-normal text-[18px] font-bold ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
+                      theme ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     Remaining Balance
@@ -257,7 +262,7 @@ function LoanCalculator({ darkMode }) {
 
               <tbody
                 className={`divide-y ${
-                  darkMode
+                  theme
                     ? "divide-gray-700 bg-black text-white"
                     : "divide-gray-100 bg-white text-black"
                 }`}
@@ -283,7 +288,7 @@ function LoanCalculator({ darkMode }) {
                     <td
                       colSpan="4"
                       className={`px-6 py-3 text-center ${
-                        darkMode ? "text-gray-400" : "text-gray-500"
+                        theme ? "text-gray-400" : "text-gray-500"
                       }`}
                     >
                       Enter valid loan details to see schedule

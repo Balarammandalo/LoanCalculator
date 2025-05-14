@@ -1,13 +1,16 @@
-import React,{useState}  from 'react'
+import React,{useState , useContext}  from 'react'
 import { Link } from 'react-router-dom'
+import { ThemeContext } from '../context/ThemeContext'
 
-const NavbarIcon = ({darkMode , setDarkMode}) => {
+const NavbarIcon = () => {
     const [open, setOpen] = useState(false)
 
-    const bgColor = darkMode ? 'bg-gray-500' : 'bg-indigo-500'
-    const textColor = darkMode ? 'text-white' : 'text-white'
-    const borderColor = darkMode ? 'border-gray-600' : 'border-gray-300'
-    const hoverBg = darkMode ? 'hover:bg-black' : 'hover:bg-indigo-700'
+    const { theme, setTheme } = useContext(ThemeContext)
+
+    const bgColor = theme ? 'bg-gray-500' : 'bg-indigo-500'
+    const textColor = theme ? 'text-white' : 'text-white'
+    const borderColor = theme ? 'border-gray-600' : 'border-gray-300'
+    const hoverBg = theme ? 'hover:bg-black' : 'hover:bg-indigo-700'
 
 
     return (
@@ -24,17 +27,17 @@ const NavbarIcon = ({darkMode , setDarkMode}) => {
                         <input
                         type="checkbox"
                         className={`sr-only peer  ${hoverBg}`}
-                        checked={darkMode}
-                        onChange={() => setDarkMode(!darkMode)}
+                        checked={theme}
+                        onChange={() => setTheme(!theme)}
                         />
                         <div
                         className={`w-16 h-8 rounded-full transition-colors duration-200 ${
-                            darkMode ? 'bg-slate-300' : 'bg-indigo-900'
+                            theme ? 'bg-slate-300' : 'bg-indigo-900'
                         }`}
                         ></div>
                         <span
                             className={`dot absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-transform duration-200 ease-in-out ${
-                                darkMode ? 'translate-x-8' : ''
+                                theme ? 'translate-x-8' : ''
                             }`}
                             ></span>
                     </label>
@@ -56,9 +59,9 @@ const NavbarIcon = ({darkMode , setDarkMode}) => {
                 <Link to="/exchange" className={`block ${textColor}`}>Exchange Rate (Live)</Link>
                 <Link to="/error" className={`block ${textColor}`}>Error</Link>
                 <button
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={() => setTheme(!theme)}
                 className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm">
-                Toggle {darkMode ? 'Light' : 'Dark'} Mode
+                Toggle {theme ? 'Light' : 'Dark'} Mode
                 </button>
             </div>
         </nav>
