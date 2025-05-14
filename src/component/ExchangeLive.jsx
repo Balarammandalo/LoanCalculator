@@ -1,4 +1,3 @@
-// import NavbarIcon from "./NavbarIcon";
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import NavbarIcon from "./NavbarIcon";

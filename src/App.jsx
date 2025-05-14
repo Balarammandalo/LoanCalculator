@@ -5,7 +5,6 @@ import Home from './component/Home'
 import {Routes , Route} from 'react-router-dom'
 import ExchangeLive from './component/ExchangeLive'
 import ErrorPage from './component/ErrorPage'
-import NavbarIcon from './component/NavbarIcon'
 
 const App = () => {
   return (
